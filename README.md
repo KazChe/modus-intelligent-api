@@ -1,4 +1,4 @@
-# Modus Learnings for Make Glorious
+# Excuse Generator with Modus
 
 This project uses AssemblyScript and the [Modus](https://docs.hypermode.com/modus/overview) SDK to generate creative and humorous excuses.
 

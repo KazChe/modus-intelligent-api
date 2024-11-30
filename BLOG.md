@@ -1,5 +1,9 @@
 ## Why Modus?
 
+- What is Hypermode?
+- What is Modus?
+- Boilerplate abstraction
+
 ### Intelligent API, what does that mean?
 
 ### GraphQL-first API
@@ -20,9 +24,17 @@
   - WebAssembly
   -
 
+#### Building blocks
+
+- Modus is a microservice architecture
+-
+
 #### Architecture
 
 - Modus is a microservice architecture
 -
 
 ## Demo
+
+- manifest.json
+-

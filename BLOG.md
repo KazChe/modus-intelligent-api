@@ -44,7 +44,7 @@ Traditional backend frameworks execute code directly on the host system, requiri
 
 #### Cross-Language Compatibility
 
-Unlike frameworks that are tied to specific programming languages, Modus's WebAssembly approach enables true polyglot development:((todo: is it though?))
+Unlike frameworks that are tied to specific programming languages, Modus's WebAssembly approach enables a form of polyglot development (though perhaps not truly polyglot):
 
 - Write functions in any language that compiles to WebAssembly (Go, Rust, AssemblyScript, etc.)
 - Maintain consistent performance characteristics across language choices

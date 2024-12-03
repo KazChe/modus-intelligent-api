@@ -58,6 +58,33 @@ WebAssembly's near-native performance makes it aviable alternative to traditiona
 - **Efficient Resource Usage**: Small memory footprint and fast execution make it ideal for serverless environments
 - **Predictable Performance**: Consistent execution times due to ahead-of-time compilation
 
+#### Language Choice: A Strategic Decision
+
+While Modus supports both Go and AssemblyScript, the inclusion of AssemblyScript as a first-class language deserves particular attention. The claim that "AssemblyScript is ideal for web developers getting started with WebAssembly" reflects both strategic advantages and practical considerations:
+
+**Web Developer Advantages:**
+- TypeScript-like syntax provides immediate familiarity
+- Similar tooling and development patterns to frontend work
+- Natural progression for JavaScript/TypeScript developers
+
+**Technical Benefits:**
+- Purpose-built for WebAssembly, unlike Go which requires TinyGo compilation
+- Optimized for web-centric use cases
+- Simpler mental model for web developers
+
+However, this choice also comes with trade-offs:
+- Smaller ecosystem compared to Go
+- Fewer libraries and tools available
+- Still evolving language features
+- May not be optimal for all backend computing scenarios
+
+By supporting both AssemblyScript and Go, Modus offers teams flexibility in their approach:
+- Frontend teams can leverage their TypeScript expertise with AssemblyScript
+- Backend teams can utilize their existing Go knowledge
+- Projects can mix languages based on specific microservice requirements
+
+This dual-language strategy reflects a pragmatic approach to WebAssembly adoption, acknowledging that different teams have different starting points intheir WebAssembly journey.
+
 #### Trade-offs and Considerations
 
 While WebAssembly brings many advantages, it's essential to understand the trade-offs:

@@ -30,10 +30,47 @@ While many modern backend frameworks already offer excellent developer experienc
 
 Let's dive deeper into these aspects and see how they complement existing backend development practices.
 
+### WebAssembly-First: A New Paradigm for Backend Services
+
+While WebAssembly (Wasm) is traditionally associated with browser-based applications, Modus leverages it as a foundational technology for backend services. This unconventional choice brings several compelling advantages:
+
+#### Security Through Isolation
+
+Traditional backend frameworks execute code directly on the host system, requiring careful consideration of security boundaries. Modus's WebAssembly runtime (powered by Wazero) provides inherent security benefits:
+
+- **Sandboxed Execution**: Each function runs in its own isolated environment, preventing unauthorized access to system resources
+- **Memory Safety**: WebAssembly's linear memory model eliminates entire classes of memory-related vulnerabilities
+- **Controlled System Access**: Functions can only access resources explicitly granted by the runtime
+
+#### Cross-Language Compatibility
+
+Unlike frameworks that are tied to specific programming languages, Modus's WebAssembly approach enables true polyglot development:((todo: is it though?))
+
+- Write functions in any language that compiles to WebAssembly (Go, Rust, AssemblyScript, etc.)
+- Maintain consistent performance characteristics across language choices
+- Share types and interfaces between different language implementations
+
+#### Performance Characteristics
+
+WebAssembly's near-native performance makes it aviable alternative to traditional backend runtimes:
+
+- **Quick Cold Starts**: WebAssembly modules initialize faster than traditional containerized services
+- **Efficient Resource Usage**: Small memory footprint and fast execution make it ideal for serverless environments
+- **Predictable Performance**: Consistent execution times due to ahead-of-time compilation
+
+#### Trade-offs and Considerations
+
+While WebAssembly brings many advantages, it's essential to understand the trade-offs:
+
+- **Ecosystem Maturity**: The WebAssembly ecosystem for backend services is still evolving
+- **Development Workflow**: Requires compilation to WebAssembly as an additional build step
+- **Language Support**: Not all programming languages have mature WebAssembly support
+
+Despite these considerations, Modus's WebAssembly-first approach enables a unique combination of security, performance, and language flexibility that's particularly well suited for building modern,secure, and efficient backend services.
+
 
 <!-- - What is Hypermode?
-- What is Modus?
-- Boilerplate abstraction -->
+
 
 ### Intelligent API, what does that mean?
 

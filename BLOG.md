@@ -20,9 +20,20 @@ My opinion, as Modus stands right now, is that they can at least bring about a p
 
 ## Why Modus?
 
-- What is Hypermode?
+While many modern backend frameworks already offer excellent developer experience with features like code generation, type safety, and reducing boilerplate configurations and code, Modus takes a unique approach by combining these familiar benefits with some distinctive twists of it own:
+
+1. **WebAssembly-First**: Unlike traditional backend frameworks that primarily use Node.js, Go, Python, or Rust, Modus leverages WebAssembly for secure, sandboxed function execution with near-native performance.
+
+2. **Model-Native Design**: While other frameworks can certainly integrate with AI/ML models, Modus treats them as first-class citizens in the development process, making it particularly well-suited for building intelligent APIs.
+
+3. **GraphQL Schema Generation**: Though automatic schema generation isn't unique to Modus (frameworks like Nexus, TypeGraphQL, and others offer similar capabilities), Modus's approach through WebAssembly enables this across multiple programming languages while maintaining type safety.
+
+Let's dive deeper into these aspects and see how they complement existing backend development practices.
+
+
+<!-- - What is Hypermode?
 - What is Modus?
-- Boilerplate abstraction
+- Boilerplate abstraction -->
 
 ### Intelligent API, what does that mean?
 

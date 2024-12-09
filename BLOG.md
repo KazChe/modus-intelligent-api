@@ -8,7 +8,7 @@ According their github repository:
 
 Now, a brief look at their github repository examples and their documentation, you might notice they are doing somethings differently from the rest of the backend frameworks:
 
-- WebAssembly. Where most of backend frameworks use Nodejs, Go, Pythone and Rust amongst others, Modus uses WebAssembly. I think this is a unique choice and dare I say smart as we will dive a bit deeper into this choice and its benefits.
+- WebAssembly. Where most of backend frameworks use Nodejs, Go, Python and Rust amongst others, Modus uses WebAssembly. I think this is a unique choice and dare I say smart as we will dive a bit deeper into this choice and its benefits.
 
 - Model-native apps. This is a term I had to think about a bit, could not find an "official" definition. But, I think it borrows, although not the same thing, the spirit of `Cloud-native apps`. Both represent some sort of evolution of in software architecture. Cloud-native apps helped us with how we build and deploy software by deeply integrating cloud principles. Model-native apps aim to do the same by embedding AI/ML models as foundational components in develpoing intellegent APIs.
 
@@ -22,23 +22,23 @@ My opinion, as Modus stands right now, is that they can at least bring about a p
 
 While many modern backend frameworks already offer excellent developer experience with features like code generation, type safety, and reducing boilerplate configurations and code, Modus takes a unique approach by combining these familiar benefits with some distinctive twists of it own:
 
-1. **WebAssembly-First**:
-
-2. **Model-Native Design**:
-
-3. **GraphQL Schema Generation**:
-
 ### WebAssembly-First: A New Paradigm for Backend Services
 
-#### Security Through Isolation
+### Model-Native Design:
 
-- **Sandboxed Execution**:
-- **Memory Safety**:
-- **Controlled System Access**:
+### GraphQL Schema Generation:
 
-#### Cross-Language Compatibility
+### Security Through Isolation
 
-#### Performance Characteristics
+### Sandboxed Execution
+
+### Memory Safety
+
+### Controlled System Access
+
+### Cross-Language Compatibility
+
+### Performance Characteristics
 
 WebAssembly's near-native performance makes it aviable alternative to traditional backend runtimes:
 

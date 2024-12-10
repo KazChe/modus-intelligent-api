@@ -24,6 +24,8 @@ While many modern backend frameworks already offer excellent developer experienc
 
 ### WebAssembly-First: A New Paradigm for Backend Services
 
+- add reference to new blog-to-be WASM101.md
+
 ### Model-Native Design:
 
 ### GraphQL Schema Generation:
@@ -53,6 +55,8 @@ While WebAssembly brings many advantages, it's essential to understand the trade
 - **Ecosystem Maturity**:
 - **Development Workflow**:
 - **Language Support**:
+
+-
 
 <!-- - What is Hypermode?
 

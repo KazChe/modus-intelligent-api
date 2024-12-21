@@ -22,25 +22,25 @@ My opinion, as Modus stands right now, is that they can at least bring about a p
 
 While many modern backend frameworks already offer excellent developer experience with features like code generation, type safety, and reducing boilerplate configurations and code, Modus takes a unique approach by combining these familiar benefits with some distinctive twists of it own:
 
-### WebAssembly-First: A New Paradigm for Backend Services
+#### WebAssembly-First: A New Paradigm for Backend Services
 
-- add reference to new blog-to-be WASM101.md
+If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 
-### Model-Native Design:
+#### Model-Native Design:
 
-### GraphQL Schema Generation:
+#### GraphQL Schema Generation:
 
-### Security Through Isolation
+#### Security Through Isolation
 
-### Sandboxed Execution
+#### Sandboxed Execution
 
-### Memory Safety
+#### Memory Safety
 
-### Controlled System Access
+#### Controlled System Access
 
-### Cross-Language Compatibility
+#### Cross-Language Compatibility
 
-### Performance Characteristics
+#### Performance Characteristics
 
 WebAssembly's near-native performance makes it aviable alternative to traditional backend runtimes:
 

@@ -37,7 +37,7 @@ Looking into their GitHub repository:
 Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 > wazero is the only zero dependency WebAssembly runtime written in Go.
 
-
+WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is pure Wasm runtime for embadding Wasm execution within Go applications and Go ecosystem. 
 
 #### Model-Native Design:
 

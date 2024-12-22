@@ -24,7 +24,20 @@ While many modern backend frameworks already offer excellent developer experienc
 
 #### WebAssembly-First: A New Paradigm for Backend Services
 
-If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the very very high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+
+Modus can help the developers leverage using Wasm as their runtime and at the same time abstracting much of the complexiity. Developers can reap the benefits of Wasm's sandbox execution, protability, performance and as they insist language agnosticism, although Go and AssemblyScript are available for now, but word is others are in the works.
+
+Looking into their GitHub repository:
+
+- AssemblyScript code compiles to Wasm (that's what AssemblyScript can do)
+- Go code complies to Wasm via TinyGo
+- Then Wazeo executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
+
+Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+> wazero is the only zero dependency WebAssembly runtime written in Go.
+
+
 
 #### Model-Native Design:
 

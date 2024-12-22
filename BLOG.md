@@ -26,7 +26,7 @@ While many modern backend frameworks already offer excellent developer experienc
 
 If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the very very high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 
-Modus can help the developers leverage using Wasm as their runtime and at the same time abstracting much of the complexiity. Developers can reap the benefits of Wasm's sandbox execution, protability, performance and as they insist language agnosticism, although Go and AssemblyScript are available for now, but word is others are in the works.
+Modus can help the developers leverage using Wasm as their runtime and at the same time abstracting much of the complexiity. Developers can reap the benefits of Wasm's sandbox execution, protability, performance and language agnosticism. Should be note that only Go and AssemblyScript are available for now, but word is others are in the works.
 
 Looking into their GitHub repository:
 
@@ -37,7 +37,9 @@ Looking into their GitHub repository:
 Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 > wazero is the only zero dependency WebAssembly runtime written in Go.
 
-WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is pure Wasm runtime for embadding Wasm execution within Go applications and Go ecosystem. 
+WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is  Wasm runtime for embedding Wasm execution within Go applications and Go ecosystem. However, I should emphasize that Wazero is a Wasm runtime and at the end of the day it provides execution context to Wasm modules whether they were compiled from Go or AssemblyScript.
+
+
 
 #### Model-Native Design:
 

@@ -45,6 +45,28 @@ WASI is an excellent general purpose for Wasm and a formal spec for system-level
 
 #### GraphQL Schema Generation:
 
+//TODO: To provide more (visual) clarity to reader, add modus soruce code, set breakpoints and take screenshot (or use the new fancy screen recorder?)
+
+Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters) 
+
+Digging into the coase base, you will see how they identify query field names:
+```go
+// prefixes that are used to identify query fields, and will be trimmed from the field name
+var queryTrimPrefixes = []string{"get", "list"}
+```
+
+and how they identify GraphQl mutations. As part of Modus's function-grpahql mapping, it uses the function names, specifically as documented below, the prefixes you use to name your functions to generate the mutations for you on the fly:
+
+```go
+// prefixes that are used to identify mutation fields
+var mutationPrefixes = []string{
+	"mutate",
+	"post", "patch", "put", "delete",
+	"add", "update", "insert", "upsert",
+	"create", "edit", "save", "remove", "alter", "modify",
+}
+```
+
 #### Security Through Isolation
 
 #### Sandboxed Execution

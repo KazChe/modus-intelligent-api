@@ -39,9 +39,51 @@ Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly
 
 WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is  Wasm runtime for embedding Wasm execution within Go applications and Go ecosystem. However, I should emphasize that Wazero is a Wasm runtime and at the end of the day it provides execution context to Wasm modules whether they were compiled from Go or AssemblyScript.
 
-
-
 #### Model-Native Design:
+
+This concept of Model-Native refers to how Modus integrates models directly into its platform and how they are treates as first-class components. Leveraging this concept and its implementation by Modus, provides us with the following advantages:
+
+##### Seamless AI integration
+Modus includes a built-in model interface that allows you to interact with AI models just as you would be with APIs.This interface abstracts away complexities like SDK integration or API specific parameters.
+
+##### Centralized Model Management
+Models are defined in the Modus manifest (modus.json). You can configure models, for example, specifying parameters like token limits, temperature and more, creating a consistent access. For instance integrating a new AI model might require only updating the Modus manifest (modus.json).
+
+Here we're using OpenAI's gpt-4o model:
+```json
+{
+  "$schema": "https://schema.hypermode.com/modus.json",
+  "endpoints": {
+    "default": {
+      "type": "graphql",
+      "path": "/graphql",
+      "auth": "bearer-token"
+    }
+  },
+  "connections": {
+    "openai": {
+      "type": "http",
+      "baseUrl": "https://api.openai.com/",
+      "headers": {
+        "Authorization": "Bearer {{API_KEY}}"
+      }
+    }
+  },
+  "models": {
+    "llm": {
+      "sourceModel": "gpt-4o",
+      "connection": "openai",
+      "path": "v1/chat/completions"
+    }
+  }
+}
+```
+
+##### Unified Workflow
+Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and  this interface supports tasks like text generation, embeddings, classification, and more.
+
+
+
 
 #### GraphQL Schema Generation:
 

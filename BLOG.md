@@ -160,6 +160,28 @@ While WebAssembly brings many advantages, it's essential to understand the trade
 
 - **Ecosystem Maturity**:
 - **Development Workflow**:
+
+A .wasm file from my own [export function generateExcuses(event: string): string](https://github.com/KazChe/modus-intelligent-api/blob/main/assembly/index.ts) converted to a textual representation .wat file snippet:
+```c
+(func $assembly/index/generateExcuses (;394;) (type 0) (param $event i32) (result i32)
+    (local $model i32) (local $2 i32) (local $prompt i32) (local $4 i32) (local $5 i32) (local $input i32) (local $response i32) (local i32)
+    global.get $~lib/memory/__stack_pointer
+    i32.const 48
+    i32.sub
+    global.set $~lib/memory/__stack_pointer
+    call $~stack_check
+    global.get $~lib/memory/__stack_pointer
+    i32.const 0
+    i32.const 48
+    memory.fill
+    global.get $~lib/memory/__stack_pointer
+    global.get $~lib/@hypermode/modus-sdk-as/assembly/models/factory
+    local.set 8
+    global.get $~lib/memory/__stack_pointer
+    ...
+    ```
+
+
 - **Language Support**:
 
 -

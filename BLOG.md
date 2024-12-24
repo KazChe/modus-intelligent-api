@@ -35,7 +35,7 @@ Looking into their GitHub repository:
 - Then Wazeo executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
 
 Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
-> wazero is the only zero dependency WebAssembly runtime written in Go.
+> wazero is a WebAssembly runtime, written completely in Go. It has no platform dependencies, so can be used in any environment supported by Go.
 
 WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is  Wasm runtime for embedding Wasm execution within Go applications and Go ecosystem. However, I should emphasize that Wazero is a Wasm runtime and at the end of the day it provides execution context to Wasm modules whether they were compiled from Go or AssemblyScript.
 
@@ -47,9 +47,9 @@ WASI is an excellent general purpose for Wasm and a formal spec for system-level
 
 //TODO: To provide more (visual) clarity to reader, add modus soruce code, set breakpoints and take screenshot (or use the new fancy screen recorder?)
 
-Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters) 
+Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters in Go) 
 
-Digging into the coase base, you will see how they identify query field names:
+Digging into the code base, you will see how they identify query field names:
 ```go
 // prefixes that are used to identify query fields, and will be trimmed from the field name
 var queryTrimPrefixes = []string{"get", "list"}
@@ -64,6 +64,75 @@ var mutationPrefixes = []string{
 	"post", "patch", "put", "delete",
 	"add", "update", "insert", "upsert",
 	"create", "edit", "save", "remove", "alter", "modify",
+}
+```
+
+what happens if none of mutaitonPrefixes are found in a function's name? if none of the `mutationPrefixes` are found in a function's name then it becomes a Query by default. This can be seen in the `isMutation` function in `conventions.go`
+
+```go
+func isMutation(fnName string) bool {
+	prefix := getPrefix(fnName, mutationPrefixes)
+	if prefix == "" {
+		return false
+	}
+
+	// embedders are not mutations
+	embedders := getEmbedderFields()
+	return !embedders[fnName]
+}
+```
+
+the check for `embedders` as you might have guessed is a special type of function that is used for vector search/embeddings in collections. These are filtered out from both GraphQl Queries and Mutations. here is the relevant code - `filters.go`
+
+```go
+func getFieldFilter() func(*FieldDefinition) bool {
+    embedders := getEmbedderFields()
+    return func(f *FieldDefinition) bool {
+        return !embedders[f.Name]  // Filter out embedder fields
+    }
+}
+
+func getEmbedderFields() map[string]bool {
+    embedders := make(map[string]bool)
+    for _, collection := range manifestdata.GetManifest().Collections {
+        for _, searchMethod := range collection.SearchMethods {
+            embedders[getFieldName(searchMethod.Embedder)] = true
+        }
+    }
+    return embedders
+}
+```
+basically the framework uses above functions to say :
+- `getEmbedderFields()` = "Here's the list of embedders"
+- `getFieldFilter()` = "Here's a function that will filter out anything in that list"
+
+
+and you can see here how they come together when  used in the schema generation process, specifically in `transformFunctions()` in `schemagen.go`:
+```go
+func transformFunctions(functions metadata.FunctionMap, inputTypeDefs, resultTypeDefs map[string]*TypeDefinition, lti langsupport.LanguageTypeInfo) (*RootObjects, []*TransformError) {
+    queryFields := make([]*FieldDefinition, 0, len(functions))
+    mutationFields := make([]*FieldDefinition, 0, len(functions))
+    errors := make([]*TransformError, 0)
+    filter := getFieldFilter()  // here Get the filter function is called
+
+    fnNames := utils.MapKeys(functions)
+    sort.Strings(fnNames)
+    for _, name := range fnNames {
+        //some code
+        field := &FieldDefinition{
+            Name:      fieldName,
+            Arguments: args,
+            Type:      returnType,
+            Function:  fn.Name,
+        }
+        if filter(field) { //apply the filter here
+            if isMutation(fn.Name) {
+                mutationFields = append(mutationFields, field)
+            } else {
+                queryFields = append(queryFields, field)
+            }
+        }
+    }
 }
 ```
 
@@ -132,3 +201,15 @@ While WebAssembly brings many advantages, it's essential to understand the trade
 
 - manifest.json
 -
+-->
+references:
+
+wazero https://wazero.io/docs/
+
+webassembly
+
+assemblyscrip
+
+modus
+
+hypermod

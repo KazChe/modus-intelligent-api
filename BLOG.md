@@ -26,7 +26,8 @@ While many modern backend frameworks already offer excellent developer experienc
 
 If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the very very high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 
-Modus can help the developers leverage using Wasm as their runtime and at the same time abstracting much of the complexiity. Developers can reap the benefits of Wasm's sandbox execution, protability, performance and language agnosticism. Should be note that only Go and AssemblyScript are available for now, but word is others are in the works.
+Note that, Modus can help the developers leverage using Wasm as their runtime without needing to understand WebAssembly's internals. Just write your code in Go or AssemblyScript and Modu will take of the rest.
+Developers can reap the benefits of Wasm's sandbox execution, protability, performance and language agnosticism. Should be noteed that only Go and AssemblyScript are available for now, but word is others are in the works.
 
 Looking into their GitHub repository:
 
@@ -35,21 +36,25 @@ Looking into their GitHub repository:
 - Then Wazeo executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
 
 Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+
 > wazero is a WebAssembly runtime, written completely in Go. It has no platform dependencies, so can be used in any environment supported by Go.
 
-WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is  Wasm runtime for embedding Wasm execution within Go applications and Go ecosystem. However, I should emphasize that Wazero is a Wasm runtime and at the end of the day it provides execution context to Wasm modules whether they were compiled from Go or AssemblyScript.
+WASI is an excellent general purpose for Wasm and a formal spec for system-level interfaces for Wasm, but Wazero is Wasm runtime for embedding Wasm execution within Go applications and Go ecosystem. However, I should emphasize that Wazero is a Wasm runtime and at the end of the day it provides execution context to Wasm modules whether they were compiled from Go or AssemblyScript.
 
 #### Model-Native Design:
 
-This concept of Model-Native refers to how Modus integrates models directly into its platform and how they are treates as first-class components. Leveraging this concept and its implementation by Modus, provides us with the following advantages:
+This concept of Model-Native refers to how Modus integrates AI models directly into its platform and how they are treated as first-class components. Leveraging this concept and its implementation by Modus, provides us with the following advantages:
 
 ##### Seamless AI integration
+
 Modus includes a built-in model interface that allows you to interact with AI models just as you would be with APIs.This interface abstracts away complexities like SDK integration or API specific parameters.
 
 ##### Centralized Model Management
+
 Models are defined in the Modus manifest (modus.json). You can configure models, for example, specifying parameters like token limits, temperature and more, creating a consistent access. For instance integrating a new AI model might require only updating the Modus manifest (modus.json).
 
 Here we're using OpenAI's gpt-4o model:
+
 ```json
 {
   "$schema": "https://schema.hypermode.com/modus.json",
@@ -80,18 +85,17 @@ Here we're using OpenAI's gpt-4o model:
 ```
 
 ##### Unified Workflow
-Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and  this interface supports tasks like text generation, embeddings, classification, and more.
 
-
-
+Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and this interface supports tasks like text generation, embeddings, classification, and more.
 
 #### GraphQL Schema Generation:
 
 //TODO: To provide more (visual) clarity to reader, add modus soruce code, set breakpoints and take screenshot (or use the new fancy screen recorder?)
 
-Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters in Go) 
+Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters in Go)
 
 Digging into the code base, you will see how they identify query field names:
+
 ```go
 // prefixes that are used to identify query fields, and will be trimmed from the field name
 var queryTrimPrefixes = []string{"get", "list"}
@@ -144,12 +148,14 @@ func getEmbedderFields() map[string]bool {
     return embedders
 }
 ```
+
 basically the framework uses above functions to say :
+
 - `getEmbedderFields()` = "Here's the list of embedders"
 - `getFieldFilter()` = "Here's a function that will filter out anything in that list"
 
+and you can see here how they come together when used in the schema generation process, specifically in `transformFunctions()` in `schemagen.go`:
 
-and you can see here how they come together when  used in the schema generation process, specifically in `transformFunctions()` in `schemagen.go`:
 ```go
 func transformFunctions(functions metadata.FunctionMap, inputTypeDefs, resultTypeDefs map[string]*TypeDefinition, lti langsupport.LanguageTypeInfo) (*RootObjects, []*TransformError) {
     queryFields := make([]*FieldDefinition, 0, len(functions))
@@ -180,6 +186,26 @@ func transformFunctions(functions metadata.FunctionMap, inputTypeDefs, resultTyp
 
 #### Security Through Isolation
 
+I like to start this section by stating that; this design makes Wasm specially suitable for environments requiring high levels of security, such as Modus, cloud-native applications, and multi-tenant systems. It is a fundamental principle in software and systems design that is applied across different technologies to enhance security and reliability. So, keep a mental note of this as we proceed.
+
+The following is goes over the high level and the very basics of how Modus handles WebAssembly execution without getting into in the technical details. If I survive the next few weeks/months, I'm planning to dig deeper into each phase where posiible.
+
+Assume your code is now complied, and you have a .wasm file. 
+
+- This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation.
+- When a client sends a request, such as an HTTP or GraphQL query, the request gets maps to a function in your Wasm module and triggers the execution of the Wasm function
+
+- At this point the Wazero runtime comes into play:
+  - A new Wasm **instance** is created for the request
+  - The Wazero runtime loads the Wasm module into memory and allocates a fresh **linear memory space** for the instance.
+  - The specific function mapped to the request is invoked within the Wasm **instance**
+  - Wazero ensures that execution happens securely and in **isolation** leveraging Wasm’s sandboxing capabilities.
+
+For this section, the key points, highlighted above, are:
+- **instance**:
+- **linear memory space**
+
+
 #### Sandboxed Execution
 
 #### Memory Safety
@@ -190,7 +216,7 @@ func transformFunctions(functions metadata.FunctionMap, inputTypeDefs, resultTyp
 
 #### Performance Characteristics
 
-WebAssembly's near-native performance makes it aviable alternative to traditional backend runtimes:
+WebAssembly's near-native performance makes it a viable alternative to traditional backend runtimes:
 
 - **Quick Cold Starts**: =
 - **Efficient Resource Usage**:
@@ -204,7 +230,8 @@ While WebAssembly brings many advantages, it's essential to understand the trade
 - **Development Workflow**:
 
 A .wasm file from my own [export function generateExcuses(event: string): string](https://github.com/KazChe/modus-intelligent-api/blob/main/assembly/index.ts) converted to a textual representation .wat file snippet:
-```c
+
+````c
 (func $assembly/index/generateExcuses (;394;) (type 0) (param $event i32) (result i32)
     (local $model i32) (local $2 i32) (local $prompt i32) (local $4 i32) (local $5 i32) (local $input i32) (local $response i32) (local i32)
     global.get $~lib/memory/__stack_pointer
@@ -277,3 +304,4 @@ assemblyscrip
 modus
 
 hypermod
+````

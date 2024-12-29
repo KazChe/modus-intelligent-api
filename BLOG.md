@@ -192,21 +192,22 @@ The following is goes over the high level and the very basics of how Modus handl
 
 Assume your code is now complied, and you have a .wasm file. 
 
-- This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation.
+- This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation. //TODO: We will cover what is Hypermode, and deployment or import of your modus app to Hypermode via Hyp CLI and Hypermode console UI, but for now think of it a fully managed serverless framework providing the infrastructure and tolling for running modus applicatios.
 - When a client sends a request, such as an HTTP or GraphQL query, the request gets maps to a function in your Wasm module and triggers the execution of the Wasm function
 
 - At this point the Wazero runtime comes into play:
   - A new Wasm **instance** is created for the request
-  - The Wazero runtime loads the Wasm module into memory and allocates a fresh **linear memory space** for the instance.
-  - The specific function mapped to the request is invoked within the Wasm **instance**
-  - Wazero ensures that execution happens securely and in **isolation** leveraging Wasm’s sandboxing capabilities.
+  - The Wazero runtime loads the Wasm module into memory and allocates a fresh **linear memory space** for the instance
+  - The specific function mapped to the request is invoked within this Wasm **instance**
+  - Wazero ensures that execution happens securely and in **isolation** leveraging Wasm’s sandboxing capabilities
 
-For this section, the key points, highlighted above, are:
-- **instance**:
-- **linear memory space**
+![Wasm Execution](//TODO: uploda WebAssemblySandboxSecurityIsolation image to cloudfront)
 
+*Figure 1: High-level overview of Wasm execution in Modus*
 
 #### Sandboxed Execution
+
+Given Modus' affinity to Wasm it is then blessed with 
 
 #### Memory Safety
 

@@ -1,7 +1,7 @@
 # WebAssembly 101
 
 Here was/is/still is my high level understanding of WebAssembly when I started to look into it in more details:
-It takes your program in a language that supports for WebAssembply (wasm) and takes it to that very intermediary step for it to be compiled to what is very close in resemblance to the machine code (binary) executable.
+It takes your program in a language that supports for WebAssembly (wasm) and takes it to that very intermediary step for it to be compiled to what is very close in resemblance to the machine code (binary) executable.
 
 According to Mozilla Developer Network (MDN):
 
@@ -11,9 +11,9 @@ I added this to point out that although on the surface we see a lot of emphasis 
 
 ## WebAssembly is not just for the browser, but it was
 
-Maintainers of WebAssembly use the term `Embedding` which seems to be in reference to how a WebAssembly module/application can be integrated into a larger environment. This larger environment provides the WebAssemboly module to come alive and do its work. This larger environment or host provides I/O, system calls, and memory access that a WebAssembly module needs, an execution context, or a runtime. In its most simplest term WebAssembly module is nothing but a set of low-level instructions that needs to be `embedded` in order to do its work.
+Maintainers of WebAssembly use the term `Embedding` which seems to be in reference to how a WebAssembly module/application can be integrated into a larger environment. This larger environment provides the WebAssembly module to come alive and do its work. This larger environment or host provides I/O, system calls, and memory access that a WebAssembly module needs, an execution context, or a runtime. In its most simplest term WebAssembly module is nothing but a set of low-level instructions that needs to be `embedded` in order to do its work.
 
-Originally the intent for WASM was to address and target web based applications' performance in the browser. As developers realized that since this WASM thing can run in the browser's runtime or `web embedded` across multiple Operating Systems, then what the heck let's tweak it and extend it beyond the browser runtime, within a standaline runtime that's embedded directly on an Operating System, `Non-Web embedded`.
+Originally the intent for WASM was to address and target web based applications' performance in the browser. As developers realized that since this WASM thing can run in the browser's runtime or `web embedded` across multiple Operating Systems, then what the heck let's tweak it and extend it beyond the browser runtime, within a standalone runtime that's embedded directly on an Operating System, `Non-Web embedded`.
 
 # Runtime and Host
 
@@ -24,7 +24,7 @@ Another way to think about it, runtime is what WASM needs to become executable b
 ## WebAssembly System Interface (WASI) and Cellular Biology huh?
 
 is there an analogy there waiting to be found for the WASM-WASI? Yes, yes there is.
-Just bare with me for a sec.
+Just bear with me for a sec.
 
 In cellular biology, there are these things (specialized proteins) called cell surface receptors. These receptors are (think WASI):
 
@@ -55,9 +55,9 @@ Similarly, in WebAssembly ecosystem WASI functions remarkably like these cellula
 - Cell Receptor: Controls what enters and influences the cell
 - WASI: Manages and restricts how WebAssembly modules interact with host system resources
 
-You get the gist. Of course, WASI does whole lot more and you can get deeper with all of the wonderful goings on by visiting their github [repority](https://github.com/WebAssembly/WASI) as a starting point.
+You get the gist. Of course, WASI does whole lot more and you can get deeper with all of the wonderful goings on by visiting their github [repository](https://github.com/WebAssembly/WASI) as a starting point.
 
-You get the gist. Of course, WASI does whole lot more and you can get deeper with all of the wonderful goings on by visiting their github repority as a starting point.
+You get the gist. Of course, WASI does whole lot more and you can get deeper with all of the wonderful goings on by visiting their github repository as a starting point.
 
 We can go on for days talking about WASM and its ecosystem, but this should be enough for a very high level understanding of this technology to hopefully be thirsty to go and find out more.
 

@@ -201,9 +201,18 @@ Assume your code is now complied, and you have a .wasm file.
   - The specific function mapped to the request is invoked within this Wasm **instance**
   - Wazero ensures that execution happens securely and in **isolation** leveraging Wasm’s sandboxing capabilities
 
+Diagram below illustrates WebAssembly's sandbox security and isolation concepts we discussed. Showing the key components and their relationships:
+Now the diagram shows key relationships:
+
+- Resources control and limit what instances can use
+- Each Wasm instance connects to its own memory space
+- Memory spaces connect to function boundaries
+- Function boundaries control interaction with external access
+- All external communication flows through the controlled access layer
+
 ![Wasm Execution](//TODO: uploda WebAssemblySandboxSecurityIsolation image to cloudfront)
 
-*Figure 1: High-level overview of Wasm execution in Modus*
+*Figure 1: High-level overview of WebAssembly Sandbox Security Isolation*
 
 #### Sandboxed Execution
 

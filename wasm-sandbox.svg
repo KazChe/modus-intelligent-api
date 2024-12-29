@@ -1,0 +1,96 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- WebAssembly Sandbox Container -->
+  <rect x="50" y="50" width="700" height="500" fill="#1a1a1a" rx="10"/>
+  <text x="60" y="80" fill="white" font-family="Arial" font-size="16">WebAssembly Sandbox</text>
+  
+  <!-- WASM Instances Section -->
+  <rect x="70" y="100" width="200" height="250" fill="#2d1b4d" rx="5"/>
+  <text x="80" y="125" fill="white" font-family="Arial" font-size="14">WASM Instances</text>
+  
+  <!-- Individual Instances -->
+  <rect x="85" y="140" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="95" y="170" fill="white" font-family="Arial" font-size="12">Instance 1</text>
+  
+  <rect x="85" y="200" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="95" y="230" fill="white" font-family="Arial" font-size="12">Instance 2</text>
+  
+  <rect x="85" y="260" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="95" y="290" fill="white" font-family="Arial" font-size="12">Instance 3</text>
+
+  <!-- Arrows from Instances to Memory -->
+  <path d="M255 165 L290 165" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M255 225 L290 225" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M255 285 L290 285" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Resource Isolation Section -->
+  <rect x="70" y="370" width="200" height="160" fill="#2d1b4d" rx="5"/>
+  <text x="80" y="395" fill="white" font-family="Arial" font-size="14">Resource Isolation</text>
+  
+  <!-- Resource Types -->
+  <rect x="85" y="410" width="170" height="30" fill="#432b72" rx="5"/>
+  <text x="95" y="430" fill="white" font-family="Arial" font-size="12">Memory Limits</text>
+  
+  <rect x="85" y="450" width="170" height="30" fill="#432b72" rx="5"/>
+  <text x="95" y="470" fill="white" font-family="Arial" font-size="12">CPU Allocation</text>
+  
+  <rect x="85" y="490" width="170" height="30" fill="#432b72" rx="5"/>
+  <text x="95" y="510" fill="white" font-family="Arial" font-size="12">File Descriptors</text>
+
+  <!-- Arrows from Resources to Instances -->
+  <path d="M170 410 L170 360" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Memory Isolation -->
+  <rect x="290" y="100" width="200" height="250" fill="#2d1b4d" rx="5"/>
+  <text x="300" y="125" fill="white" font-family="Arial" font-size="14">Memory Isolation</text>
+  
+  <!-- Memory Spaces -->
+  <rect x="305" y="140" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="315" y="170" fill="white" font-family="Arial" font-size="12">Memory Space 1</text>
+  
+  <rect x="305" y="200" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="315" y="230" fill="white" font-family="Arial" font-size="12">Memory Space 2</text>
+  
+  <rect x="305" y="260" width="170" height="50" fill="#432b72" rx="5"/>
+  <text x="315" y="290" fill="white" font-family="Arial" font-size="12">Memory Space 3</text>
+
+  <!-- Function Boundary Control -->
+  <rect x="510" y="100" width="220" height="250" fill="#2d1b4d" rx="5"/>
+  <text x="520" y="125" fill="white" font-family="Arial" font-size="14">Function Boundary Control</text>
+  
+  <!-- Function Types -->
+  <rect x="525" y="140" width="190" height="80" fill="#432b72" rx="5"/>
+  <text x="535" y="165" fill="white" font-family="Arial" font-size="12">Exported Functions</text>
+  <text x="535" y="185" fill="#aaa" font-family="Arial" font-size="10">Functions exposed to host</text>
+  
+  <rect x="525" y="230" width="190" height="80" fill="#432b72" rx="5"/>
+  <text x="535" y="255" fill="white" font-family="Arial" font-size="12">Imported Functions</text>
+  <text x="535" y="275" fill="#aaa" font-family="Arial" font-size="10">Host functions available to WASM</text>
+
+  <!-- Arrows between Memory and Functions -->
+  <path d="M475 165 L510 165" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M475 270 L510 270" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- External Access Control -->
+  <rect x="510" y="370" width="220" height="160" fill="#2d1b4d" rx="5"/>
+  <text x="520" y="395" fill="white" font-family="Arial" font-size="14">Controlled External Access</text>
+  
+  <!-- Access Components -->
+  <rect x="525" y="410" width="190" height="30" fill="#432b72" rx="5"/>
+  <text x="535" y="430" fill="white" font-family="Arial" font-size="12">WASM Adapter</text>
+  
+  <rect x="525" y="450" width="190" height="30" fill="#432b72" rx="5"/>
+  <text x="535" y="470" fill="white" font-family="Arial" font-size="12">Functions Registry</text>
+  
+  <rect x="525" y="490" width="190" height="30" fill="#432b72" rx="5"/>
+  <text x="535" y="510" fill="white" font-family="Arial" font-size="12">Host Services Layer</text>
+
+  <!-- Arrows from Functions to External Access -->
+  <path d="M620 310 L620 370" stroke="white" fill="none" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Define arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="white"/>
+    </marker>
+  </defs>
+</svg>

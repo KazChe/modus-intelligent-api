@@ -210,15 +210,34 @@ Now the diagram shows key relationships:
 - Function boundaries control interaction with external access
 - All external communication flows through the controlled access layer
 
-![Wasm Execution](//TODO: uploda WebAssemblySandboxSecurityIsolation image to cloudfront)
+![Wasm Execution](//TODO: upload WebAssemblySandboxSecurityIsolation image to cloudfront) ???
 
 *Figure 1: High-level overview of WebAssembly Sandbox Security Isolation*
 
 #### Sandboxed Execution
 
-Given Modus' affinity to Wasm it is then blessed with 
+Given Modus' affinity to Wasm it is then blessed with Wasm's Sandboxed executions model
+
+![Sandbox Execution](//TODO: upload wasm-flow.svg image to cloudfront)
+
+Docker's founder Solomon Hykes expressed his prespective on Wasm (and WASI) like this:
+
+![Solomon Hyke tweet in 2019](//TODO: upload solomon-hykes-wasm-wasi-2019.png image to cloudfront)
 
 #### Memory Safety
+
+Few pointers on memeory safety to keep in my mind:
+
+- **Linear Memory Model**: Wasm modules can only access their own linear memory space, preventing unauthorized access to other parts of the system memory.
+
+- **Bounds Checking**: All memory access is automatically bounds-checked, preventing buffer overflows and memory corruption vulnerabilities.
+
+- **Type Safety**: Wasm's type system ensures that functions can only be called with correct parameter types and memory can only be accessed in well-defined ways. This is enforced at both runtime and compilte time, please refer to refrence material at the end of this post.
+
+- **No Direct Pointer Access**: Unlike native code, Wasm cannot directly manipulate memory addresses or perform pointer arithmetic, eliminating entire classes of memory-related vulnerabilities. It worth mentioning thagt while direct pointer manipulation isn't possible, Wasm does provide controlled ways to work with memory indices.
+
+These safety features make Wasm particularly ideal for secure sandboxed execution of code, whether in the browser or in server-side environment.
+
 
 #### Controlled System Access
 
@@ -226,18 +245,6 @@ Given Modus' affinity to Wasm it is then blessed with
 
 #### Performance Characteristics
 
-WebAssembly's near-native performance makes it a viable alternative to traditional backend runtimes:
-
-- **Quick Cold Starts**: =
-- **Efficient Resource Usage**:
-- **Predictable Performance**:
-
-#### Trade-offs and Considerations
-
-While WebAssembly brings many advantages, it's essential to understand the trade-offs:
-
-- **Ecosystem Maturity**:
-- **Development Workflow**:
 
 A .wasm file from my own [export function generateExcuses(event: string): string](https://github.com/KazChe/modus-intelligent-api/blob/main/assembly/index.ts) converted to a textual representation .wat file snippet:
 
@@ -307,11 +314,11 @@ references:
 
 wazero https://wazero.io/docs/
 
-webassembly
+webassembly:
+[memory and type safety](https://webassembly.github.io/spec/core/appendix/properties.html?highlight=memory+safety)
 
 assemblyscrip
 
 modus
 
 hypermod
-````

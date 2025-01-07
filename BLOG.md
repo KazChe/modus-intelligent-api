@@ -190,7 +190,7 @@ I like to start this section by stating that; this design makes Wasm specially s
 
 The following is goes over the high level and the very basics of how Modus handles WebAssembly execution without getting into in the technical details. If I survive the next few weeks/months, I'm planning to dig deeper into each phase where posiible.
 
-Assume your code is now complied, and you have a .wasm file. 
+Assume your code is now complied, and you have a .wasm file.
 
 - This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation. //TODO: We will cover what is Hypermode, and deployment or import of your modus app to Hypermode via Hyp CLI and Hypermode console UI, but for now think of it a fully managed serverless framework providing the infrastructure and tolling for running modus applicatios.
 - When a client sends a request, such as an HTTP or GraphQL query, the request gets maps to a function in your Wasm module and triggers the execution of the Wasm function
@@ -212,7 +212,7 @@ Now the diagram shows key relationships:
 
 ![Wasm Execution](//TODO: upload WebAssemblySandboxSecurityIsolation image to cloudfront) ???
 
-*Figure 1: High-level overview of WebAssembly Sandbox Security Isolation*
+_Figure 1: High-level overview of WebAssembly Sandbox Security Isolation_
 
 #### Sandboxed Execution
 
@@ -226,9 +226,9 @@ Docker's founder Solomon Hykes expressed his prespective on Wasm (and WASI) like
 
 #### Memory Safety
 
-Few pointers on memeory safety to keep in my mind:
+Few pointers on memeory safety to keep in mind:
 
-- **Linear Memory Model**: Wasm modules can only access their own linear memory space, preventing unauthorized access to other parts of the system memory.
+- **Linear Memory Model**: Wasm modules can only access their own linear memory space, preventing unauthorized access to other parts of the system memory. This isolates modules from each other in addition to the underlying host environment and prevents security issues such as unauthorized access.
 
 - **Bounds Checking**: All memory access is automatically bounds-checked, preventing buffer overflows and memory corruption vulnerabilities.
 
@@ -238,35 +238,9 @@ Few pointers on memeory safety to keep in my mind:
 
 These safety features make Wasm particularly ideal for secure sandboxed execution of code, whether in the browser or in server-side environment.
 
+In the next part of this series we will cover Modus basic set up and cofiguration, plus a quick demo and build upon that as we move forward in this series.
 
-#### Controlled System Access
-
-#### Cross-Language Compatibility
-
-#### Performance Characteristics
-
-
-A .wasm file from my own [export function generateExcuses(event: string): string](https://github.com/KazChe/modus-intelligent-api/blob/main/assembly/index.ts) converted to a textual representation .wat file snippet:
-
-````c
-(func $assembly/index/generateExcuses (;394;) (type 0) (param $event i32) (result i32)
-    (local $model i32) (local $2 i32) (local $prompt i32) (local $4 i32) (local $5 i32) (local $input i32) (local $response i32) (local i32)
-    global.get $~lib/memory/__stack_pointer
-    i32.const 48
-    i32.sub
-    global.set $~lib/memory/__stack_pointer
-    call $~stack_check
-    global.get $~lib/memory/__stack_pointer
-    i32.const 0
-    i32.const 48
-    memory.fill
-    global.get $~lib/memory/__stack_pointer
-    global.get $~lib/@hypermode/modus-sdk-as/assembly/models/factory
-    local.set 8
-    global.get $~lib/memory/__stack_pointer
-    ...
-    ```
-
+## Part II
 
 - **Language Support**:
 
@@ -310,6 +284,7 @@ A .wasm file from my own [export function generateExcuses(event: string): string
 - manifest.json
 -
 -->
+
 references:
 
 wazero https://wazero.io/docs/

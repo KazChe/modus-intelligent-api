@@ -10,11 +10,11 @@ Now, a brief look at their github repository examples and their documentation, y
 
 - WebAssembly. Where most of backend frameworks use Nodejs, Go, Python and Rust amongst others, Modus uses WebAssembly. I think this is a unique choice and dare I say smart as we will dive a bit deeper into this choice and its benefits.
 
-- Model-native apps. This is a term I had to think about a bit, could not find an "official" definition. But, I think it borrows, although not the same thing, the spirit of `Cloud-native apps`. Both represent some sort of evolution of in software architecture. Cloud-native apps helped us with how we build and deploy software by deeply integrating cloud principles. Model-native apps aim to do the same by embedding AI/ML models as foundational components in develpoing intellegent APIs.
+- Model-native apps. This is a term I had to think about a bit, could not find an "official" definition. But, I think it borrows, although not the same thing, the spirit of `Cloud-native apps`. Both represent some sort of evolution of in software architecture. Cloud-native apps helped us with how we build and deploy software by deeply integrating cloud principles. Model-native apps aim to shift our designs by embedding AI/ML models as foundational components in developing intelligent APIs.
 
-The question remains whether Modus truly brings about about paradigm shift in software architecture. Modus, withstanding the fact that it is a relatively new project, I personally am curiously excited to follow them and see whether a broader adoption of WebAssembly and AI/ML models will have a long term impact on its adoption.
+The question remains whether Modus truly brings about about a paradigm shift in software architecture. Modus, withstanding the fact that it is a relatively new project, I personally am curiously excited to follow them and see whether a broader adoption of WebAssembly and AI/ML models will have a long term impact on its adoption.
 
-Can they bring about a paradigm shift? Will it gain the adoption needed for it to truly bring a paradigm shift? It can be argued that its uniqueness lies in combining no new ideas but rather re-uisng existing ones in a new way.
+Can they bring about a paradigm shift? Will it gain the adoption needed for it to truly bring a paradigm shift? It can be argued that its uniqueness lies in combining not new ideas but rather re-using existing ones in a new way.
 
 My opinion, as Modus stands right now, is that they can at least bring about a paradigm-enabling concept, if they haven't already, `the model-native approach`, treating AI/ML models as foundational, first class components in developing intelligent APIs.
 
@@ -24,18 +24,19 @@ While many modern backend frameworks already offer excellent developer experienc
 
 #### WebAssembly-First: A New Paradigm for Backend Services
 
-If you are not familiar with WebAsselbly (Wasm), you can spend 30 seconds by reviewing the very very high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+If you are not familiar with WebAssembly (Wasm), you can spend 30 seconds by reviewing the very very high level concepts in this article [WebAssembly 101: Bridging the Gap Between Web and Machine](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
 
-Note that, Modus can help the developers leverage using Wasm as their runtime without needing to understand WebAssembly's internals. Just write your code in Go or AssemblyScript and Modu will take of the rest.
-Developers can reap the benefits of Wasm's sandbox execution, protability, performance and language agnosticism. Should be noteed that only Go and AssemblyScript are available for now, but word is others are in the works.
+Modus can help the developers leverage using Wasm as their runtime without needing to understand WebAssembly's internals. Just write your code in Go or AssemblyScript and Modus will take care of the rest.
+
+Developers can reap the benefits of Wasm's sandbox execution, portability, performance and language agnosticism. Should be noted that only Go and AssemblyScript are available for now, but word is others are in the works.
 
 Looking into their GitHub repository:
 
 - AssemblyScript code compiles to Wasm (that's what AssemblyScript can do)
 - Go code complies to Wasm via TinyGo
-- Then Wazeo executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
+- Then Wazero executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
 
-Wazero is one runtime to Wasm, like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine)
+Wazero is used as the runtime to Wasm, very much like [WASI](https://https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine#heading-webassembly-system-interface-wasi-and-cellular-biology-huh) is.
 
 > wazero is a WebAssembly runtime, written completely in Go. It has no platform dependencies, so can be used in any environment supported by Go.
 
@@ -47,13 +48,21 @@ This concept of Model-Native refers to how Modus integrates AI models directly i
 
 ##### Seamless AI integration
 
-Modus includes a built-in model interface that allows you to interact with AI models just as you would be with APIs.This interface abstracts away complexities like SDK integration or API specific parameters.
+Modus includes a built-in model interface that allows you to interact with AI models just as you would be with APIs. This interface abstracts away complexities like SDK integration or API specific parameters.
 
 ##### Centralized Model Management
 
-Models are defined in the Modus manifest (modus.json). You can configure models, for example, specifying parameters like token limits, temperature and more, creating a consistent access. For instance integrating a new AI model might require only updating the Modus manifest (modus.json).
+Models are defined in the Modus manifest (modus.json). You can configure models, for example, specifying parameters like token limits, temperature and more, creating a consistent access. For instance integrating a new AI model might require only updating the Modus manifest (modus.json). We will talk more about what this manifest is but for now think of it as a declaration, like a ship's manifest that helps port authorities (in our case Hypermode) understand what's aboard, in short modus.json helps our runtime understand:
 
-Here we're using OpenAI's gpt-4o model:
+- How to map your functions to GraphQL operations
+- Integration points with external services
+- Required configurations and dependencies
+
+In the following sample `manifest.json` we're declaring:
+
+- Use gpt-4o as its source model ("sourceModel": "gpt-4o")
+- Use "openai" connection defined via the `connections` property
+- and specify the API endpoint path for chat completions `"path": "v1/chat/completions"`
 
 ```json
 {
@@ -86,22 +95,22 @@ Here we're using OpenAI's gpt-4o model:
 
 ##### Unified Workflow
 
-Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and this interface supports tasks like text generation, embeddings, classification, and more.
+We will cover more on this in the next series, but I felt it is befitting to briefly cover how modus addresses the GraphQL generation part.
+
+ Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and this interface supports tasks like text generation, embeddings, classification, and more.
 
 #### GraphQL Schema Generation:
 
-//TODO: To provide more (visual) clarity to reader, add modus soruce code, set breakpoints and take screenshot (or use the new fancy screen recorder?)
-
 Behind the magic of Modus is how it generates GraphQL schema for you. Functions that you expose in your code (`export`ed in AssemblyScript and starting with capital letters in Go)
 
-Digging into the code base, you will see how they identify query field names:
+Digging into their code base, you will see how they identify query field names:
 
 ```go
 // prefixes that are used to identify query fields, and will be trimmed from the field name
 var queryTrimPrefixes = []string{"get", "list"}
 ```
 
-and how they identify GraphQl mutations. As part of Modus's function-grpahql mapping, it uses the function names, specifically as documented below, the prefixes you use to name your functions to generate the mutations for you on the fly:
+and how they identify GraphQL mutations. As part of Modus's function-graphql mapping, it uses the function names, specifically as documented below, the prefixes you use to name your functions to generate the mutations for you on the fly:
 
 ```go
 // prefixes that are used to identify mutation fields
@@ -113,7 +122,7 @@ var mutationPrefixes = []string{
 }
 ```
 
-what happens if none of mutaitonPrefixes are found in a function's name? if none of the `mutationPrefixes` are found in a function's name then it becomes a Query by default. This can be seen in the `isMutation` function in `conventions.go`
+what happens if none of `mutaitonPrefixes` are found in a function's name? if none of the `mutationPrefixes` are found in a function's name then it becomes a Query by default. This can be seen in the `isMutation` function in `conventions.go`
 
 ```go
 func isMutation(fnName string) bool {
@@ -186,14 +195,17 @@ func transformFunctions(functions metadata.FunctionMap, inputTypeDefs, resultTyp
 
 #### Security Through Isolation
 
-I like to start this section by stating that; this design makes Wasm specially suitable for environments requiring high levels of security, such as Modus, cloud-native applications, and multi-tenant systems. It is a fundamental principle in software and systems design that is applied across different technologies to enhance security and reliability. So, keep a mental note of this as we proceed.
+I like to start this section by stating that; Security Through Isolation design principle makes Wasm specially suitable for environments requiring high levels of security, such as Modus, cloud-native applications, and multi-tenant systems. It is a fundamental principle in software and systems design that is applied across different technologies to enhance security and reliability. So, keep a mental note of this as we proceed.
 
-The following is goes over the high level and the very basics of how Modus handles WebAssembly execution without getting into in the technical details. If I survive the next few weeks/months, I'm planning to dig deeper into each phase where posiible.
+The following goes over the high level and the very basics of how Modus handles WebAssembly execution without getting into in the technical details. If I survive the next few weeks/months, I'm planning to dig deeper into each phase where possible.
 
-Assume your code is now complied, and you have a .wasm file.
+#### Sandboxed Execution
 
-- This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation. //TODO: We will cover what is Hypermode, and deployment or import of your modus app to Hypermode via Hyp CLI and Hypermode console UI, but for now think of it a fully managed serverless framework providing the infrastructure and tolling for running modus applicatios.
-- When a client sends a request, such as an HTTP or GraphQL query, the request gets maps to a function in your Wasm module and triggers the execution of the Wasm function
+Assume your code is now complied, and you have a `.wasm` file. 
+
+- This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation. In next part of this series we will cover what is Hypermode, and deployment or import of your modus app to Hypermode via Hyp CLI and Hypermode console UI, but for now think of it a fully managed serverless framework providing the infrastructure for running modus applications.
+
+- When a client sends a request, such as an HTTP or GraphQL query, the request gets mapped to a function in your Wasm module and triggers the execution of the Wasm function
 
 - At this point the Wazero runtime comes into play:
   - A new Wasm **instance** is created for the request
@@ -202,7 +214,6 @@ Assume your code is now complied, and you have a .wasm file.
   - Wazero ensures that execution happens securely and in **isolation** leveraging Wasm’s sandboxing capabilities
 
 Diagram below illustrates WebAssembly's sandbox security and isolation concepts we discussed. Showing the key components and their relationships:
-Now the diagram shows key relationships:
 
 - Resources control and limit what instances can use
 - Each Wasm instance connects to its own memory space
@@ -210,41 +221,34 @@ Now the diagram shows key relationships:
 - Function boundaries control interaction with external access
 - All external communication flows through the controlled access layer
 
-![Wasm Execution](//TODO: upload WebAssemblySandboxSecurityIsolation image to cloudfront) ???
-
-_Figure 1: High-level overview of WebAssembly Sandbox Security Isolation_
-
-#### Sandboxed Execution
-
-Given Modus' affinity to Wasm it is then blessed with Wasm's Sandboxed executions model
-
-![Sandbox Execution](//TODO: upload wasm-flow.svg image to cloudfront)
-
-Docker's founder Solomon Hykes expressed his prespective on Wasm (and WASI) like this:
-
-![Solomon Hyke tweet in 2019](//TODO: upload solomon-hykes-wasm-wasi-2019.png image to cloudfront)
+*Figure 1: High-level overview of WebAssembly Sandbox Security Isolation*
+![Wasm Execution](https://dhbtuus86mod.cloudfront.net/wasm-sandbox.svg)
 
 #### Memory Safety
 
-Few pointers on memeory safety to keep in mind:
+Few pointers on memory safety to keep in my mind:
 
-- **Linear Memory Model**: Wasm modules can only access their own linear memory space, preventing unauthorized access to other parts of the system memory. This isolates modules from each other in addition to the underlying host environment and prevents security issues such as unauthorized access.
+- **Linear Memory Model**: Wasm modules can only access their own linear memory space, preventing unauthorized access to other parts of the system memory.
 
 - **Bounds Checking**: All memory access is automatically bounds-checked, preventing buffer overflows and memory corruption vulnerabilities.
 
-- **Type Safety**: Wasm's type system ensures that functions can only be called with correct parameter types and memory can only be accessed in well-defined ways. This is enforced at both runtime and compilte time, please refer to refrence material at the end of this post.
+- **Type Safety**: Wasm's type system ensures that functions can only be called with correct parameter types and memory can only be accessed in well-defined ways. This is enforced at both runtime and compile time, please refer to reference material at the end of this post.
 
-- **No Direct Pointer Access**: Unlike native code, Wasm cannot directly manipulate memory addresses or perform pointer arithmetic, eliminating entire classes of memory-related vulnerabilities. It worth mentioning thagt while direct pointer manipulation isn't possible, Wasm does provide controlled ways to work with memory indices.
+- **No Direct Pointer Access**: Unlike native code, Wasm cannot directly manipulate memory addresses or perform pointer arithmetic, eliminating entire classes of memory-related vulnerabilities. It worth mentioning that while direct pointer manipulation isn't possible, Wasm does provide controlled ways to work with memory indices.
 
 These safety features make Wasm particularly ideal for secure sandboxed execution of code, whether in the browser or in server-side environment.
 
-In the next part of this series we will cover Modus basic set up and cofiguration, plus a quick demo and build upon that as we move forward in this series.
+In the next part of this series we will dive into a demo of creating a modus app and deploying it to Hypermode platform.
 
-## Part II
+`all opinions are me own`
 
-- **Language Support**:
+References:
+wazero wazero.io/docs
+webassembly: memory and type safety
 
--
+^^^ published ^^^ 
+
+---
 
 <!-- - What is Hypermode?
 
@@ -286,13 +290,6 @@ In the next part of this series we will cover Modus basic set up and cofiguratio
 -->
 
 references:
-
-wazero https://wazero.io/docs/
-
-webassembly:
-[memory and type safety](https://webassembly.github.io/spec/core/appendix/properties.html?highlight=memory+safety)
-
-assemblyscrip
 
 modus
 

@@ -97,7 +97,7 @@ In the following sample `manifest.json` we're declaring:
 
 We will cover more on this in the next series, but I felt it is befitting to briefly cover how modus addresses the GraphQL generation part.
 
- Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and this interface supports tasks like text generation, embeddings, classification, and more.
+Instead of writing specific HTTP requests for various AI model, you then use a standardized Modus model interface and this interface supports tasks like text generation, embeddings, classification, and more.
 
 #### GraphQL Schema Generation:
 
@@ -201,7 +201,7 @@ The following goes over the high level and the very basics of how Modus handles 
 
 #### Sandboxed Execution
 
-Assume your code is now complied, and you have a `.wasm` file. 
+Assume your code is now complied, and you have a `.wasm` file.
 
 - This compiled Wasm module gets uploaded to the Modus environment and is associated with an API endpoint like a GraphQL query or mutation. In next part of this series we will cover what is Hypermode, and deployment or import of your modus app to Hypermode via Hyp CLI and Hypermode console UI, but for now think of it a fully managed serverless framework providing the infrastructure for running modus applications.
 
@@ -221,7 +221,7 @@ Diagram below illustrates WebAssembly's sandbox security and isolation concepts 
 - Function boundaries control interaction with external access
 - All external communication flows through the controlled access layer
 
-*Figure 1: High-level overview of WebAssembly Sandbox Security Isolation*
+_Figure 1: High-level overview of WebAssembly Sandbox Security Isolation_
 ![Wasm Execution](https://dhbtuus86mod.cloudfront.net/wasm-sandbox.svg)
 
 #### Memory Safety
@@ -246,15 +246,16 @@ References:
 wazero wazero.io/docs
 webassembly: memory and type safety
 
-^^^ published ^^^ 
-
+^^^ published ^^^
 
 ## PART II
 
 # notes-use
 
 ---
+
 ### on using own API keys to an LLM or Hypermode's hosted
+
 Modus app that uses your own API key to OpenAI GPT-4 should still work when deployed to Hypermode. However, you'll need to ensure that your API key is properly managed as a secret.
 
 When working locally, Modus uses environment variables to handle secrets like API keys. These are typically stored in a .env.dev.local file in your app folder. For example:
@@ -273,15 +274,12 @@ In Part I we scratched the surface on Modus and how its Model-Native apps concep
 
 Let's go through the high level flow of this modus app which the gist of it can be summarized in the following screenshot:
 
-![IMG](https://dhbtuus86mod.cloudfront.net/grahql-query-result.png)
+![IMG](https://dhbtuus86mod.cloudfront.net/graphql-req-resp.png)
 
-- It's running locally as you can tell
-- It is a GraphQL `Query` type
-- Has a `generateExecses` method that returns us a `String`
-- and this method has a parameter called `event`, that seems to be an invite to a wedding
-- In the bottom half of the UI we see a response to this call that provides a logical execuse for not being able to attend this event.
-
-
+- This is a modus app and it's running locally as you can tell
+- It has a GraphQL `Query` type
+- Along with a `generateExecses` method that returns us a `String` and a parameter call `event` that seems to be an invite to a wedding of some sort
+- In the response portion of the UI we see a response to this call that provides couple of legit execuses
 
 
 <!-- - What is Hypermode?

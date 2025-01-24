@@ -246,7 +246,7 @@ References:
 wazero wazero.io/docs
 webassembly: memory and type safety
 
-^^^ published ^^^
+^^^ published at: https://kamc.hashnode.dev/challenging-the-hype-a-look-at-modus-and-the-future-of-model-native-apps-part-1 ^^^
 
 ## PART II
 

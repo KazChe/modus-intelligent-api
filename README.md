@@ -79,3 +79,5 @@ Follow the instructions [here](https://docs.hypermode.com/modus/quickstart#build
   "reason": "OK"
 }
 ````
+
+used in blog [Challenging the Hype: A Look at Modus and the Future of Model-Native Apps - Part I](https://kamc.hashnode.dev/challenging-the-hype-a-look-at-modus-and-the-future-of-model-native-apps-part-1)

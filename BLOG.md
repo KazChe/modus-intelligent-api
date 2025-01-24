@@ -36,7 +36,7 @@ Looking into their GitHub repository:
 - Go code complies to Wasm via TinyGo
 - Then Wazero executes resulting Wasm modules regardless of source language (github.com/tetratelabs/wazero)
 
-Wazero is used as the runtime to Wasm, very much like [WASI](https://https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine#heading-webassembly-system-interface-wasi-and-cellular-biology-huh) is.
+Wazero is used as the runtime to Wasm, very much like [WASI](https://kamc.hashnode.dev/webassembly-101-bridging-the-gap-between-web-and-machine#heading-webassembly-system-interface-wasi-and-cellular-biology-huh) is.
 
 > wazero is a WebAssembly runtime, written completely in Go. It has no platform dependencies, so can be used in any environment supported by Go.
 
@@ -248,7 +248,41 @@ webassembly: memory and type safety
 
 ^^^ published ^^^ 
 
+
+## PART II
+
+# notes-use
+
 ---
+### on using own API keys to an LLM or Hypermode's hosted
+Modus app that uses your own API key to OpenAI GPT-4 should still work when deployed to Hypermode. However, you'll need to ensure that your API key is properly managed as a secret.
+
+When working locally, Modus uses environment variables to handle secrets like API keys. These are typically stored in a .env.dev.local file in your app folder. For example:
+
+MODUS_OPENAI_API_KEY="your openai key"
+
+When deploying to Hypermode, you'll need to make sure your API key is securely stored and accessible to your app. The exact method for managing secrets in Hypermode isn't explicitly mentioned in the their docs (please let me know if I'm mistaken), but it's likely that Hypermode provides a way to securely store and access such secrets in a deployed environment.
+
+It's important to note that while Hypermode offers some hosted models, it also supports connections to external services like OpenAI. Your app's manifest file should define the connection to OpenAI, including how the API key is referenced.
+
+It's important to note that while Hypermode offers some hosted models, it also supports connections to external services like OpenAI. Your app's manifest file should define the connection to OpenAI, including how the API key is referenced.
+
+---
+
+In Part I we scratched the surface on Modus and how its Model-Native apps concept aims to shift our designs by embedding AI/ML models as foundational components in developing intelligent APIs. Now we're going to create a overly simple GraphQL endpoint that received a request and based on its content responds with some over-the-top sarcastic response.
+
+Let's go through the high level flow of this modus app which the gist of it can be summarized in the following screenshot:
+
+![IMG](https://dhbtuus86mod.cloudfront.net/grahql-query-result.png)
+
+- It's running locally as you can tell
+- It is a GraphQL `Query` type
+- Has a `generateExecses` method that returns us a `String`
+- and this method has a parameter called `event`, that seems to be an invite to a wedding
+- In the bottom half of the UI we see a response to this call that provides a logical execuse for not being able to attend this event.
+
+
+
 
 <!-- - What is Hypermode?
 

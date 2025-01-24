@@ -281,6 +281,12 @@ Let's go through the high level flow of this modus app which the gist of it can 
 - Along with a `generateExecses` method that returns us a `String` and a parameter call `event` that seems to be an invite to a wedding of some sort
 - In the response portion of the UI we see a response to this call that provides couple of legit execuses
 
+## Behind the scenes
+TODO: index.ts - cover method to graphql generation stuff
+TODO: modus.json
+TODO: go over `npx modus dev`
+TODO: modus api explorer
+TODO: github repo link 
 
 <!-- - What is Hypermode?
 

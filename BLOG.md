@@ -268,7 +268,7 @@ It's important to note that while Hypermode offers some hosted models, it also s
 
 ---
 
-In Part I we scratched the surface on Modus and how its Model-Native apps concept aims to shift our designs by embedding AI/ML models as foundational components in developing intelligent APIs. Now we're going to create a overly simple GraphQL endpoint that received a request and based on its content responds with some over-the-top sarcastic response.
+In [Part I](https://kamc.hashnode.dev/challenging-hype-modus-model-native) we scratched the surface on Modus and how its Model-Native apps concept aims to shift our designs by embedding AI/ML models as foundational components in developing intelligent APIs. Now we're going to create a overly simple GraphQL endpoint that received a request and based on its content responds with some over-the-top sarcastic response.
 
 Let's go through the high level flow of this modus app which the gist of it can be summarized in the following screenshot:
 

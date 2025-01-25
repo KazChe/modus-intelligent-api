@@ -1,4 +1,4 @@
-used in blog [Challenging the Hype: A Look at Modus and the Future of Model-Native Apps - Part I](https://kamc.hashnode.dev/challenging-the-hype-a-look-at-modus-and-the-future-of-model-native-apps-part-1)
+used in blog [Challenging the Hype: A Look at Modus and the Future of Model-Native Apps - Part I](https://kamc.hashnode.dev/challenging-hype-modus-model-native)
 
 # Excuse Generator with Modus
 

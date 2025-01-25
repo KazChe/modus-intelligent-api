@@ -21,7 +21,7 @@ export function generateExcuses(event: string): string {
     new UserMessage(prompt),
   ]);
 
-  // Set temperature higher for more creative responses
+  // set temperature to higher valuefor more creative responses
   input.temperature = 0.9;
 
   const response = model.invoke(input);

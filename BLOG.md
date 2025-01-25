@@ -282,11 +282,80 @@ Let's go through the high level flow of this modus app which the gist of it can 
 - In the response portion of the UI we see a response to this call that provides couple of legit execuses
 
 ## Behind the scenes
-TODO: index.ts - cover method to graphql generation stuff
+
 TODO: modus.json
+
+```json
+{
+  "$schema": "https://schema.hypermode.com/modus.json",
+  "endpoints": {
+    "default": {
+      "type": "graphql",
+      "path": "/graphql",
+      "auth": "bearer-token"
+    }
+  },
+  "connections": {
+    "openai": {
+      "type": "http",
+      "baseUrl": "https://api.openai.com/",
+      "headers": {
+        "Authorization": "Bearer {{API_KEY}}"
+      }
+    }
+  },
+  "models": {
+    "llm": {
+      "sourceModel": "gpt-4o",
+      "connection": "openai",
+      "path": "v1/chat/completions"
+    }
+  }
+}
+```
+
+TODO: index.ts - cover method to graphql generation stuff
+
+```js
+import { models } from "@hypermode/modus-sdk-as";
+import {
+  OpenAIChatModel,
+  SystemMessage,
+  UserMessage,
+} from "@hypermode/modus-sdk-as/models/openai/chat";
+
+export function generateExcuses(event: string): string {
+  const modelName: string = "llm";
+  const model = models.getModel<OpenAIChatModel>(modelName);
+
+  const prompt = `Generate 2 absurd, sarcastic, over-the-top and dark excuses for why I can't attend "${event}".
+  Make them elaborate, ridiculous, and completely unbelievable.
+  Each excuse should be at least 2 sentences long.
+  Format the response as a JSON array of strings, with each excuse as a separate element.`;
+
+  const input = model.createInput([
+    new SystemMessage(
+      "You are a creative, dark and sarcastic excuse generator. Your excuses should be outlandish and humorous."
+    ),
+    new UserMessage(prompt),
+  ]);
+
+  // set temperature to higher value for more creative responses
+  input.temperature = 0.9;
+
+  const response = model.invoke(input);
+  return response.choices[0].message.content.trim();
+
+  // return JSON.parse<string[]>(content);
+}
+```
+
 TODO: go over `npx modus dev`
+
 TODO: modus api explorer
-TODO: github repo link 
+
+TODO: github repo link
+Codebase is available [here](https://github.com/KazChe/modus-intelligent-api)
 
 <!-- - What is Hypermode?
 

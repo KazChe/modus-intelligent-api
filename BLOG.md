@@ -266,8 +266,6 @@ When deploying to Hypermode, you'll need to make sure your API key is securely s
 
 It's important to note that while Hypermode offers some hosted models, it also supports connections to external services like OpenAI. Your app's manifest file should define the connection to OpenAI, including how the API key is referenced.
 
-It's important to note that while Hypermode offers some hosted models, it also supports connections to external services like OpenAI. Your app's manifest file should define the connection to OpenAI, including how the API key is referenced.
-
 ---
 
 In Part I we scratched the surface on Modus and how its Model-Native apps concept aims to shift our designs by embedding AI/ML models as foundational components in developing intelligent APIs. Now we're going to create a overly simple GraphQL endpoint that received a request and based on its content responds with some over-the-top sarcastic response.
@@ -283,6 +281,7 @@ Let's go through the high level flow of this modus app which the gist of it can 
 
 ## Behind the scenes
 
+As we mentioned in [part I](https://kamc.hashnode.dev/challenging-the-hype-a-look-at-modus-and-the-future-of-model-native-apps-part-1) of this series `modus.json` is like a manifest of your modus app.
 TODO: modus.json
 
 ```json
@@ -354,6 +353,9 @@ TODO: go over `npx modus dev`
 
 TODO: modus api explorer
 
+TODO: here is the diagram that depicts the high level interaction and flow of how this simple modus app works:
+
+![IMG](https://dhbtuus86mod.cloudfront.net/modus-blog-local-sample-app.png)
 TODO: github repo link
 Codebase is available [here](https://github.com/KazChe/modus-intelligent-api)
 

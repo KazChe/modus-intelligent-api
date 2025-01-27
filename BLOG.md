@@ -369,9 +369,16 @@ Diagram below depicts the high level interaction and flow of how this simple mod
 
 ![IMG](https://dhbtuus86mod.cloudfront.net/modus-blog-local-sample-app.png)
 
-Codebase is available [here](https://github.com/KazChe/modus-intelligent-api)
+Note, you can use the Hyp CLI alongside Modus CLI to access Hypermode-hosted models for local development. The API Explorer interface is available locally for testing your functions.
 
-//TODO: update end of Part I article with link to this (Part II)
+
+Codebase is available [here](https://github.com/KazChe/modus-intelligent-api). Follow its [`README`](https://github.com/KazChe/modus-intelligent-api/blob/main/README.md) for setting up your local environment.
+
+In Part III, we will cover importing our Modus app into the Hypermode platform. While local development offers more immediate control and testing capabilities, deploying to Hypermode provides a more robust, production-ready environment with features for managing, securing, and observing your app.
+
+published to:
+https://kamc.hashnode.dev/modus-local-development-part-ii
+
 <!-- - What is Hypermode?
 
 

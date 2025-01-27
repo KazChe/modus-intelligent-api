@@ -282,7 +282,7 @@ Let's go through the high level flow of this modus app which the gist of it can 
 ## Behind the scenes
 
 As we mentioned in [part I](https://kamc.hashnode.dev/challenging-the-hype-a-look-at-modus-and-the-future-of-model-native-apps-part-1) of this series `modus.json` is like a manifest of your modus app.
-TODO: modus.json
+
 
 ```json
 {
@@ -313,7 +313,7 @@ TODO: modus.json
 }
 ```
 
-TODO: index.ts - cover method to graphql generation stuff
+and our `index.ts`, which serves as your main export for our AssemblyScript function `generateExcuses()` and makes it available in our app's generated API.
 
 ```js
 import { models } from "@hypermode/modus-sdk-as";
@@ -344,21 +344,34 @@ export function generateExcuses(event: string): string {
 
   const response = model.invoke(input);
   return response.choices[0].message.content.trim();
-
-  // return JSON.parse<string[]>(content);
 }
 ```
 
-TODO: go over `npx modus dev`
+to run the app locally we issue:
+```bash
+npx modus dev
+```
+and we will see an output like the following:
 
-TODO: modus api explorer
+![IMG](https://dhbtuus86mod.cloudfront.net/npx-run-modus-output.png)
 
-TODO: here is the diagram that depicts the high level interaction and flow of how this simple modus app works:
+You can then use either of the following endpoints to interact with your app:
+
+```bash
+Your local endpoint is ready!
+GraphQL (default): http://localhost:8686/graphql
+View endpoint: http://localhost:8686/explorer
+```
+
+![IMG](https://dhbtuus86mod.cloudfront.net/graphql-req-resp.png)
+
+Diagram below depicts the high level interaction and flow of how this simple modus app works:
 
 ![IMG](https://dhbtuus86mod.cloudfront.net/modus-blog-local-sample-app.png)
-TODO: github repo link
+
 Codebase is available [here](https://github.com/KazChe/modus-intelligent-api)
 
+//TODO: update end of Part I article with link to this (Part II)
 <!-- - What is Hypermode?
 
 
